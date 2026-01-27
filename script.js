@@ -1,5 +1,5 @@
 // Script.js - Data-Driven Portfolio Rendering
-const BASE_URL = 'https://backend-production-e830.up.railway.app';
+const BASE_URL = 'https://backend-production-e830.up.railway.app/api';
 
 async function apiRequest(endpoint) {
     try {
