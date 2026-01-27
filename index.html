@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio - Web Technologies Assignment</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="nav-brand" id="nav-brand"></div>
+        <ul class="nav-menu" id="nav-menu">
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Bio/Hero Section -->
+    <section class="hero" id="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1 id="hero-greeting"></h1>
+            <p id="hero-bio"></p>
+            <div class="hero-social" id="hero-social"></div>
+          </div>
+          <div class="hero-image-container">
+            <div class="floating-cube cube-1"></div>
+            <div class="floating-cube cube-2"></div>
+            <div class="floating-cube cube-3"></div>
+            <div class="floating-cube cube-4"></div>
+            <div class="floating-cube cube-5"></div>
+            <img
+              id="hero-img"
+              src=""
+              alt="Profile Picture"
+              class="hero-main-image"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education-section" id="education-section">
+      <div class="container">
+        <h2 class="section-title">I specialize in</h2>
+        <div class="education-content">
+          <div class="education-left">
+            <div class="education-tools" id="education-tools"></div>
+          </div>
+          <div class="education-right">
+            <div class="specialization-cards" id="specialization-cards"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills-section">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-container">
+          <div class="skills-category">
+            <h3>Technical Skills</h3>
+            <div class="skills-grid" id="technical-skills"></div>
+          </div>
+          <div class="skills-category">
+            <h3>Professional Skills</h3>
+            <div class="skills-grid" id="professional-skills"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience/Projects Section -->
+    <section class="projects-section" id="projects-section">
+      <div class="container">
+        <h2 class="section-title">Experience & Projects</h2>
+        <div class="projects-grid" id="projects-grid"></div>
+      </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section class="reviews-section" id="reviews-section">
+      <div class="container">
+        <h2 class="section-title">Customer reviews</h2>
+        <div class="reviews-wrapper">
+          <div class="reviews-viewport">
+            <div class="reviews-grid" id="reviews-grid"></div>
+          </div>
+
+          <div class="review-navigation">
+            <button class="review-nav-btn" id="prev-review">←</button>
+            <button class="review-nav-btn" id="next-review">→</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact-section">
+      <div class="container">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-wrapper">
+          <form id="contact-form" class="contact-form">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your name"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                type="email"
+                id="email-input"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="How can I help you?"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+          <div class="contact-image">
+            <img
+              src="https://images.unsplash.com/photo-1552581234-26160f608093?w=500&h=600&fit=crop"
+              alt="Contact Us"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-main">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-left">
+            <img
+              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop"
+              alt="Profile"
+              class="footer-avatar"
+            />
+            <div class="footer-cta">
+              <h3 id="footer-cta-title"></h3>
+              <div class="footer-buttons" id="footer-buttons"></div>
+            </div>
+          </div>
+          <div class="footer-right">
+            <div class="footer-card">
+              <h4 id="footer-card-title"></h4>
+              <p id="footer-card-text"></p>
+              <button
+                class="footer-contact-btn"
+                id="footer-contact-btn"
+              ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Copyright Footer -->
+    <div class="copyright-footer">
+      <div class="container">
+        <p id="footer-text"></p>
+      </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
