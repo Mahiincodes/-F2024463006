@@ -19,12 +19,12 @@ async function loadBio() {
 }
 async function loadEducation() {
     const data = await apiRequest('education');
-    if (data) console.log("Education Data Loaded:", data);
+    if (data) return data.results;
 }
 
 async function loadSkills() {
-    const data = await apiRequest('skills');
-    if (data) console.log("Skills Data Loaded:", data);
+    const data = await apiRequest('skills/grouped');
+    if (data) return data;
 }
 
 async function loadProjects() {
@@ -69,7 +69,7 @@ async function renderBio() {
     const heroBio = document.getElementById('hero-bio');
     const heroSocial = document.getElementById('hero-social');
     const heroImg = document.getElementById('hero-img');
-const greeting = `HEY! I'm ${firstName},<br>${bioData.job_title}</span>`;
+    const greeting = `HEY! I'm ${firstName},<br>${bioData.job_title}</span>`;
     heroGreeting.innerHTML =greeting;
     heroBio.textContent = bioData.professional_description;
     heroImg.src = bioData.profile_picture;
@@ -87,69 +87,87 @@ const greeting = `HEY! I'm ${firstName},<br>${bioData.job_title}</span>`;
 
 
 // Render Education Section
+// Render Education Section
 async function renderEducation() {
-     await loadEducation();
-    const educationTools = document.getElementById('education-tools');
+    const eduData = await loadEducation(); // Fetches the array from API
     const specializationCards = document.getElementById('specialization-cards');
+    const educationTools = document.getElementById('education-tools');
 
-    if (!educationTools || !specializationCards) return;
+    if (!specializationCards || !eduData) return;
 
-    // Clear existing content
-    educationTools.innerHTML = '';
+    // 1. Clear existing placeholder content
     specializationCards.innerHTML = '';
 
-    // Render tool icons
-    portfolioData.education.tools.forEach(tool => {
-        const toolIcon = document.createElement('div');
-        toolIcon.className = `tool-icon ${tool.name.toLowerCase().replace(/\s+/g, '-')}`;
-        toolIcon.textContent = tool.icon;
-        toolIcon.title = tool.name;
-        educationTools.appendChild(toolIcon);
-    });
-
-    // Render specialization cards
-    portfolioData.education.specializations.forEach(spec => {
+    // 2. Map API data to your "Specialization Cards" design
+    eduData.forEach((edu, index) => {
         const card = document.createElement('div');
         card.className = 'specialization-card';
 
+        // Use index + 1 for the number (01, 02, etc.)
         const number = document.createElement('div');
         number.className = 'specialization-number';
-        number.textContent = spec.number;
+        number.textContent = (index + 1).toString().padStart(2, '0');
 
+        // Heading: Degree Name + Institution
         const title = document.createElement('h3');
-        title.textContent = spec.title;
+        title.textContent = `${edu.degree_name} at ${edu.institution}`;
 
+        // Description: From API
         const description = document.createElement('p');
-        description.textContent = spec.description;
+        description.textContent = edu.description;
 
+        // Optional: Adding the date as a small footer in the card
+        const dateSpan = document.createElement('small');
+        dateSpan.style.display = 'block';
+        dateSpan.style.marginTop = '10px';
+        dateSpan.style.opacity = '0.7';
+        dateSpan.textContent = `Completed: ${new Date(edu.end_date).getFullYear()}`;
+
+        // Append everything to the card
         card.appendChild(number);
         card.appendChild(title);
         card.appendChild(description);
+        card.appendChild(dateSpan);
 
+        // Append card to the grid
         specializationCards.appendChild(card);
     });
+
+    // 3. Render Tools (Keep fallback to portfolioData for icons)
+    // Note: If your API doesn't provide icons, we keep using the local portfolioData.tools
+    if (portfolioData && portfolioData.education.tools) {
+        educationTools.innerHTML = '';
+        portfolioData.education.tools.forEach(tool => {
+            const toolIcon = document.createElement('div');
+            toolIcon.className = `tool-icon ${tool.name.toLowerCase().replace(/\s+/g, '-')}`;
+            toolIcon.textContent = tool.icon;
+            toolIcon.title = tool.name;
+            educationTools.appendChild(toolIcon);
+        });
+    }
 }
 
 // Render Skills Section
 async function renderSkills() {
-     await loadSkills();
+    const skillsData = await loadSkills();
+    console.log("These are the skills data",skillsData)
     const technicalSkills = document.getElementById('technical-skills');
     const professionalSkills = document.getElementById('professional-skills');
 
     technicalSkills.innerHTML = '';
     professionalSkills.innerHTML = '';
 
-    portfolioData.skills.technical.forEach(skill => {
+    skillsData.technical_skills.forEach(skill => {
         const skillTag = document.createElement('div');
         skillTag.className = 'skill-tag';
-        skillTag.textContent = skill;
+        skillTag.textContent = skill.name;
         technicalSkills.appendChild(skillTag);
     });
 
-    portfolioData.skills.professional.forEach(skill => {
+    skillsData.professional_skills.forEach(skill => {
         const skillTag = document.createElement('div');
         skillTag.className = 'skill-tag';
-        skillTag.textContent = skill;
+        skillTag.textContent = skill.name;
         professionalSkills.appendChild(skillTag);
     });
 }
