@@ -14,7 +14,7 @@ async function apiRequest(endpoint) {
 async function loadBio() {
     const data = await apiRequest('bio'); 
     if (data) {
-        console.log("Bio Data Loaded:", data);
+        return data.results[0];
     }
 }
 async function loadEducation() {
@@ -63,16 +63,17 @@ navBrand.appendChild(logo);
 
 // Render Bio/Hero Section
 async function renderBio() {
-    await loadBio()
+    const bioData = await loadBio();
+    const firstName = bioData.name.split(' ')[0];
     const heroGreeting = document.getElementById('hero-greeting');
     const heroBio = document.getElementById('hero-bio');
     const heroSocial = document.getElementById('hero-social');
     const heroImg = document.getElementById('hero-img');
-
-    heroGreeting.innerHTML = portfolioData.bio.greeting;
-    heroBio.textContent = portfolioData.bio.introduction;
-    heroImg.src = portfolioData.bio.profileImage;
-    heroImg.alt = portfolioData.bio.fullName;
+const greeting = `HEY! I'm ${firstName},<br>${bioData.job_title}</span>`;
+    heroGreeting.innerHTML =greeting;
+    heroBio.textContent = bioData.professional_description;
+    heroImg.src = bioData.profile_picture;
+    heroImg.alt = bioData.name;
 
     // Render social links
     portfolioData.bio.socialLinks.forEach(social => {

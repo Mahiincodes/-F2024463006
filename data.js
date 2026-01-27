@@ -15,7 +15,7 @@ const portfolioData = {
     // Bio/Hero Section
     bio: {
         fullName: "Laura Martinez",
-        greeting: "HEY! I'm Laura,<br><span style='font-size: 48px; color: #2d3748;'>UI/UX</span> designer",
+        
         introduction: "Agency-quality Webflow websites with the personal touch of a freelancer.",
         profileImage: "./Image.png",
         socialLinks: [
