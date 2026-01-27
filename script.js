@@ -29,12 +29,12 @@ async function loadSkills() {
 
 async function loadProjects() {
     const data = await apiRequest('projects');
-    if (data) console.log("Projects Data Loaded:", data);
+    if (data) return data.results;
 }
 async function loadExperience() {
     const data = await apiRequest('experience'); 
     if (data) {
-        console.log("Experience Data Loaded:", data);
+        return data.results
     }
 }
 // Render Navigation
@@ -150,7 +150,6 @@ async function renderEducation() {
 // Render Skills Section
 async function renderSkills() {
     const skillsData = await loadSkills();
-    console.log("These are the skills data",skillsData)
     const technicalSkills = document.getElementById('technical-skills');
     const professionalSkills = document.getElementById('professional-skills');
 
@@ -174,32 +173,57 @@ async function renderSkills() {
 
 // Render Projects Section
 async function renderProjects() {
-     await loadProjects();
-      await loadExperience();
+    const projectsData = await loadProjects();
+    const experienceData = await loadExperience();
+    console.log("experienceData Data Loaded:", experienceData);
+    
     const projectsGrid = document.getElementById('projects-grid');
+    if (!projectsGrid || !projectsData) return;
+    
     projectsGrid.innerHTML = '';
 
-    portfolioData.projects.forEach((project, index) => {
+    projectsData.forEach((project, index) => {
         const projectCard = document.createElement('div');
         projectCard.className = 'project-card';
 
-        const projectImage = document.createElement('div');
-        projectImage.className = 'project-image';
-        projectImage.textContent = (index + 1).toString().padStart(2, '0');
+        // --- FIXED IMAGE RENDERING ---
+        const projectImageContainer = document.createElement('div');
+        projectImageContainer.className = 'project-image';
+        
+        // Create the image element
+        const img = document.createElement('img');
+        img.src = project.image; // Using the URL from your API
+        img.alt = project.name;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover'; // Maintains aspect ratio
+        
+        // Optional: Keep the number overlay if your design uses it
+        const numberOverlay = document.createElement('span');
+        numberOverlay.className = 'project-number';
+        numberOverlay.textContent = (index + 1).toString().padStart(2, '0');
+        numberOverlay.style.position = 'absolute';
+        
+        projectImageContainer.appendChild(img);
+        projectImageContainer.appendChild(numberOverlay);
+        // -----------------------------
 
         const projectContent = document.createElement('div');
         projectContent.className = 'project-content';
 
         const title = document.createElement('h3');
-        title.textContent = project.title;
+        title.textContent = project.name; // Fixed: project instead of projectsData
 
         const date = document.createElement('div');
         date.className = 'date';
-        date.textContent = project.date;
+        date.textContent = new Date(project.end_date).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long'
+        });
 
         const type = document.createElement('span');
         type.className = 'type';
-        type.textContent = project.type;
+        type.textContent = project.project_type;
 
         const description = document.createElement('p');
         description.textContent = project.description;
@@ -207,12 +231,15 @@ async function renderProjects() {
         const technologies = document.createElement('div');
         technologies.className = 'project-technologies';
 
-        project.technologies.forEach(tech => {
-            const techTag = document.createElement('span');
-            techTag.className = 'tech-tag';
-            techTag.textContent = tech;
-            technologies.appendChild(techTag);
-        });
+        // Check if skills_used exists before iterating
+        if (project.skills_used) {
+            project.skills_used.forEach(tech => {
+                const techTag = document.createElement('span');
+                techTag.className = 'tech-tag';
+                techTag.textContent = tech;
+                technologies.appendChild(techTag);
+            });
+        }
 
         projectContent.appendChild(title);
         projectContent.appendChild(date);
@@ -220,7 +247,7 @@ async function renderProjects() {
         projectContent.appendChild(description);
         projectContent.appendChild(technologies);
 
-        projectCard.appendChild(projectImage);
+        projectCard.appendChild(projectImageContainer);
         projectCard.appendChild(projectContent);
 
         projectsGrid.appendChild(projectCard);
@@ -332,7 +359,6 @@ function setupContactForm() {
             const formData = new FormData(this);
             const data = Object.fromEntries(formData.entries());
             
-            console.log("Form Submitted:", data);
             alert("Thank you, " + data.name + "! Your message has been sent successfully.");
             
             this.reset();
