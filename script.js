@@ -213,8 +213,8 @@ async function renderProjects() {
     numberOverlay.textContent = (index + 1).toString().padStart(2, "0");
     numberOverlay.style.position = "absolute";
 
-    // projectImageContainer.appendChild(img);
-    projectImageContainer.appendChild(numberOverlay);
+    projectImageContainer.appendChild(img);
+    // projectImageContainer.appendChild(numberOverlay);
     // -----------------------------
 
     const projectContent = document.createElement("div");

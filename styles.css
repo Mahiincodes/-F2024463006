@@ -103,7 +103,7 @@ body {
 .nav-logo {
   /* Changed to auto to maintain aspect ratio */
   display: block;
-  height: 120px;
+  height: 170px;
   width: auto;
 }
 
@@ -293,8 +293,8 @@ body {
 
 .tool-icon {
   position: absolute;
-  width: 140px;
-  height: 140px;
+  width: 230px;
+  height: 230px;
   object-fit: contain;
   border-radius: 50%;
   display: flex;
@@ -308,24 +308,24 @@ body {
 }
 
 .tool-canva {
-  top: 5%;
-  left: 40%;
+  top: -20%;
+  left: 10%;
 }
 .tool-code {
   top: 40%;
-  right: 1%;
+  right: -10%;
 }
 .tool-text {
-  bottom: 1%;
-  left: 30%;
+  bottom: -40%;
+  left: 10%;
 }
 .tool-heart {
   top: 40%;
-  left: 0%;
+  left: -40%;
 }
 .tool-lady {
   top: 40%;
-  left: 40%;
+  left: 10%;
 }
 .tool-icon:hover {
   transform: scale(1.15);
@@ -528,6 +528,9 @@ body {
   border-radius: 25px;
   overflow: hidden;
   box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   transition:
     transform 0.3s,
     box-shadow 0.3s;
@@ -541,7 +544,7 @@ body {
 .project-image {
   width: 100%;
   height: 220px;
-  background: linear-gradient(135deg, #db142c, #ffd6d8);
+  background: var(--gradient-135);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -552,12 +555,16 @@ body {
 
 .project-content {
   padding: 30px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card h3 {
   font-size: 22px;
   color: var(--text-dark);
   margin-bottom: 10px;
+  min-height: 3.2em;
 }
 
 .project-card .date {
@@ -568,9 +575,10 @@ body {
 
 .project-card .type {
   display: inline-block;
-  background: linear-gradient(135deg, #db142c, #ffd6d8);
+  background: var(--gradient-purple);
   color: var(--white);
   padding: 6px 16px;
+  width: 40%;
   border-radius: 15px;
   font-size: 13px;
   font-weight: 600;
@@ -581,12 +589,15 @@ body {
   color: var(--text-light);
   line-height: 1.8;
   margin-bottom: 20px;
+  flex-grow: 1;
 }
 
 .project-technologies {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-top: auto;
+  padding-top: 20px;
 }
 
 .tech-tag {
@@ -594,7 +605,7 @@ body {
   padding: 8px 16px;
   border-radius: 18px;
   font-size: 13px;
-  color: #db142c;
+  color: var(--primary-purple);
   font-weight: 500;
 }
 
@@ -965,7 +976,7 @@ body {
 }
 @media (min-width: 768px) {
   .nav-logo {
-    height: 120px;
+    height: 170px;
   }
 }
 @media (max-width: 768px) {
