@@ -90,7 +90,7 @@ body {
 .nav-menu li a {
     text-decoration: none;
     color: var(--white);
-    font-size: 15px;
+    font-size: 20px;
     font-weight: 500;
     transition: color 0.3s;
 }
@@ -98,15 +98,15 @@ body {
 .nav-menu li a:hover {
     color: var(--text-light);
 }
-.nav-logo {
-    height: 80px;        /* adjust as needed */
-    width: auto;
+.nav-logo {         /* Changed to auto to maintain aspect ratio */
     display: block;
+    height: 120px;
+    width: auto;
 }
 
 /* Section Title */
 .section-title {
-    font-size: 42px;
+    font-size: 56px;
     font-weight: 700;
     text-align: center;
     margin-bottom: 60px;
@@ -288,8 +288,9 @@ body {
 
 .tool-icon {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 140px;  
+    height: 140px;
+    object-fit: contain; 
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -297,11 +298,15 @@ body {
     font-size: 22px;
     font-weight: 700;
     color: var(--white);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s;
     cursor: pointer;
 }
 
+.tool-canva { top: 5%; left: 40%;  }
+.tool-code  { top: 40%; right: 1%;  }
+.tool-text  { bottom: 1%; left: 30%;  }
+.tool-heart { top: 40%; left: 0%;  }
+.tool-lady  { top: 40%; left: 40%;  }
 .tool-icon:hover {
     transform: scale(1.15);
 }
@@ -907,7 +912,7 @@ body {
 }
 @media (min-width: 768px) {
     .nav-logo {
-        height: 60px;
+        height: 120px;
     }
 }
 @media (max-width: 768px) {

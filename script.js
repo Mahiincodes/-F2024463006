@@ -63,13 +63,17 @@ navBrand.appendChild(logo);
 
 // Render Bio/Hero Section
 async function renderBio() {
+    //
     const bioData = await loadBio();
     const firstName = bioData.name.split(' ')[0];
+    const jobTitleParts = bioData.job_title.split(' ');
+    const titlePart1 = jobTitleParts[0]; // "Web"
+    const titlePart2 = jobTitleParts.slice(1).join(' ');
     const heroGreeting = document.getElementById('hero-greeting');
     const heroBio = document.getElementById('hero-bio');
     const heroSocial = document.getElementById('hero-social');
     const heroImg = document.getElementById('hero-img');
-    const greeting = `HEY! I'm ${firstName},<br>${bioData.job_title}</span>`;
+    const greeting = `HEY! I'm ${firstName},<br><span style='font-size: 48px; color: #2d3748;'>${titlePart1}</span> ${titlePart2}`;
     heroGreeting.innerHTML =greeting;
     heroBio.textContent = bioData.professional_description;
     heroImg.src = bioData.profile_picture;
@@ -91,7 +95,23 @@ async function renderBio() {
 async function renderEducation() {
     const eduData = await loadEducation(); // Fetches the array from API
     const specializationCards = document.getElementById('specialization-cards');
-    const educationTools = document.getElementById('education-tools');
+    const toolsContainer = document.querySelector('.education-tools');
+toolsContainer.innerHTML = ''; // Clear existing content
+
+const myImages = [
+    { src: './canva.webp', class: 'tool-canva' },
+    { src: './code.webp', class: 'tool-code' },
+    { src: './text.webp', class: 'tool-text' },
+    { src: './heart.webp', class: 'tool-heart' },
+    { src: './ladyimage.webp', class: 'tool-lady' }
+];
+
+myImages.forEach((imgData) => {
+    const img = document.createElement('img');
+    img.src = imgData.src;
+    img.className = `tool-icon ${imgData.class}`;
+    toolsContainer.appendChild(img);
+});
 
     if (!specializationCards || !eduData) return;
 
