@@ -24,38 +24,38 @@ const portfolioData = {
   reviews: [
     {
       name: "Anna Writens",
-      role: "Designer",
-      text: "To ensure that the Community continues to be the best place to find Figma resources, we ask that you avoid the following",
+      role: "UI Designer",
+      text: "Working with her was a smooth experience. She understood the design requirements clearly and delivered a clean, modern layout that matched our brand perfectly.",
       image:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
     },
     {
       name: "John Smith",
-      role: "Developer",
-      text: "To ensure that the Community continues to be the best place to find Figma resources, we ask that you avoid the following",
+      role: "Frontend Developer",
+      text: "Great attention to detail and solid development skills. The website was fast, responsive, and easy to maintain. Communication throughout the project was excellent.",
       image:
         "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
     },
     {
       name: "Sarah Johnson",
       role: "Product Manager",
-      text: "To ensure that the Community continues to be the best place to find Figma resources, we ask that you avoid the following",
+      text: "He delivered exactly what we needed and even suggested improvements we hadn’t considered. The final result was both functional and visually appealing.",
       image:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
     },
     {
-      name: "Anna Writens",
-      role: "Designer",
-      text: "To ensure that the Community continues to be the best place to find Figma resources, we ask that you avoid the following",
+      name: "Michael Brown",
+      role: "Startup Founder",
+      text: "Professional, reliable, and easy to work with. The website helped us establish a strong online presence and received great feedback from our users.",
       image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
     },
     {
-      name: "John Smith",
-      role: "Developer",
-      text: "To ensure that the Community continues to be the best place to find Figma resources, we ask that you avoid the following",
+      name: "Emily Carter",
+      role: "Marketing Specialist",
+      text: "Loved the overall design and performance of the site. Everything was optimized, responsive, and aligned well with our marketing goals.",
       image:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
+        "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=100&h=100&fit=crop",
     },
   ],
 
