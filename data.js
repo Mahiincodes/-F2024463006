@@ -72,6 +72,6 @@ const portfolioData = {
       buttonText: "Contact →",
     },
     copyright:
-      "© 2024 Portfolio - Web Technologies Assignment | BS Computer Science",
+      "© 2026 Portfolio -Maheen Babar",
   },
 };
