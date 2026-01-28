@@ -93,80 +93,71 @@ async function renderBio() {
 // Render Education Section
 // Render Education Section
 async function renderEducation() {
-    const eduData = await loadEducation(); // Fetches the array from API
+    const eduData = await loadEducation(); 
     const specializationCards = document.getElementById('specialization-cards');
     const toolsContainer = document.querySelector('.education-tools');
-toolsContainer.innerHTML = ''; // Clear existing content
+    
+    // 1. Render Floating Images
+    toolsContainer.innerHTML = ''; 
+    const myImages = [
+        { src: './canva.webp', class: 'tool-canva' },
+        { src: './code.webp', class: 'tool-code' },
+        { src: './text.webp', class: 'tool-text' },
+        { src: './heart.webp', class: 'tool-heart' },
+        { src: './ladyimage.webp', class: 'tool-lady' }
+    ];
 
-const myImages = [
-    { src: './canva.webp', class: 'tool-canva' },
-    { src: './code.webp', class: 'tool-code' },
-    { src: './text.webp', class: 'tool-text' },
-    { src: './heart.webp', class: 'tool-heart' },
-    { src: './ladyimage.webp', class: 'tool-lady' }
-];
-
-myImages.forEach((imgData) => {
-    const img = document.createElement('img');
-    img.src = imgData.src;
-    img.className = `tool-icon ${imgData.class}`;
-    toolsContainer.appendChild(img);
-});
+    myImages.forEach((imgData) => {
+        const img = document.createElement('img');
+        img.src = imgData.src;
+        img.className = `tool-icon ${imgData.class}`;
+        toolsContainer.appendChild(img);
+    });
 
     if (!specializationCards || !eduData) return;
 
-    // 1. Clear existing placeholder content
+    // 2. Define Gradient Pairs
+    const colorPairs = [
+        ['#8b3dff', '#e7dbff'], // Pattern 1: Purple
+        ['#b61629', '#ffd6d8'], // Pattern 2: Red
+        ['#008009', '#c3eac4']  // Pattern 3: Green
+    ];
+
     specializationCards.innerHTML = '';
 
-    // 2. Map API data to your "Specialization Cards" design
+    // 3. Render Education Cards with Dynamic Backgrounds
     eduData.forEach((edu, index) => {
         const card = document.createElement('div');
         card.className = 'specialization-card';
+        
+        // Pick colors based on index (cycles every 3 cards)
+        const pair = colorPairs[index % colorPairs.length];
+        card.style.background = `linear-gradient(180deg, ${pair[0]} 0%, ${pair[1]} 100%)`;
 
-        // Use index + 1 for the number (01, 02, etc.)
         const number = document.createElement('div');
         number.className = 'specialization-number';
         number.textContent = (index + 1).toString().padStart(2, '0');
 
-        // Heading: Degree Name + Institution
         const title = document.createElement('h3');
         title.textContent = `${edu.degree_name} at ${edu.institution}`;
 
-        // Description: From API
         const description = document.createElement('p');
         description.textContent = edu.description;
 
-        // Optional: Adding the date as a small footer in the card
         const dateSpan = document.createElement('small');
         dateSpan.style.display = 'block';
         dateSpan.style.marginTop = '10px';
         dateSpan.style.opacity = '0.7';
         dateSpan.textContent = `Completed: ${new Date(edu.end_date).getFullYear()}`;
 
-        // Append everything to the card
         card.appendChild(number);
         card.appendChild(title);
         card.appendChild(description);
         card.appendChild(dateSpan);
 
-        // Append card to the grid
         specializationCards.appendChild(card);
     });
-
-    // 3. Render Tools (Keep fallback to portfolioData for icons)
-    // Note: If your API doesn't provide icons, we keep using the local portfolioData.tools
-    if (portfolioData && portfolioData.education.tools) {
-        educationTools.innerHTML = '';
-        portfolioData.education.tools.forEach(tool => {
-            const toolIcon = document.createElement('div');
-            toolIcon.className = `tool-icon ${tool.name.toLowerCase().replace(/\s+/g, '-')}`;
-            toolIcon.textContent = tool.icon;
-            toolIcon.title = tool.name;
-            educationTools.appendChild(toolIcon);
-        });
-    }
 }
-
 // Render Skills Section
 async function renderSkills() {
     const skillsData = await loadSkills();
